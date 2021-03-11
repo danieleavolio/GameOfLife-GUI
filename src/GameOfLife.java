@@ -9,6 +9,16 @@ public class GameOfLife {
     String coloriVivi = "White";
     String coloriMorti = "Black";
     Boolean running = false;
+    int countvivi = 0;
+    int totali = lunghezza * larghezza;
+
+    public int getTotali() {
+        return totali;
+    }
+
+    public void setTotali(int totali) {
+        this.totali = totali;
+    }
 
     public Boolean getRunning() {
         return running;
@@ -16,6 +26,14 @@ public class GameOfLife {
 
     public void setRunning(Boolean running) {
         this.running = running;
+    }
+
+    public int getCountvivi() {
+        return countvivi;
+    }
+
+    public void setCountvivi(int countvivi) {
+        this.countvivi = countvivi;
     }
 
     public String getTicks() {
@@ -68,7 +86,16 @@ public class GameOfLife {
 
         return gameOfLife;
     }
+
+    public void reset(){
+        for (int i = 0; i < larghezza; i++) {
+            for (int j = 0; j < lunghezza; j++) {
+                matrice[i][j] = random.nextInt(2);
+            }
+        }
+    }
     public void controllo(){
+        countvivi = 0;
         for (int i = 1; i < matrice.length-1; i++) {
             for (int j = 1; j < matrice[i].length-1; j++) {
                 int vicini = 0;
@@ -78,6 +105,7 @@ public class GameOfLife {
 
 
                 if (matrice[i][j] == 1){
+                    countvivi++;
                     if (vicini < 2 || vicini > 3)
                         matriceDuplicazione[i][j] = 0;
                     if (vicini == 2 || vicini ==3)
@@ -96,6 +124,8 @@ public class GameOfLife {
                 matrice[i][j] = matriceDuplicazione[i][j];
             }
         }
+
+
     }
 
 
